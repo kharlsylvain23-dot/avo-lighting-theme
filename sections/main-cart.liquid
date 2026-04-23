@@ -1,0 +1,41 @@
+<section class="cart">
+  <div class="cart__inner">
+    <h1>Cart</h1>
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="cart__form">
+        <ul class="cart__items">
+          {%- for item in cart.items -%}
+            <li class="cart__item">
+              <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="80" height="auto" loading="lazy">
+              <div class="cart__item-body">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+                <div>{{ item.price | money }}</div>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <div class="cart__totals">
+          <strong>Subtotal: {{ cart.total_price | money }}</strong>
+          <button type="submit" name="update" class="cta cta--ghost">Update</button>
+          <button type="submit" name="checkout" class="cta">Checkout</button>
+        </div>
+      </form>
+    {%- else -%}
+      <p>Your cart is empty.</p>
+      <a class="cta" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section-cart",
+  "settings": [],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Cart" }]
+}
+{% endschema %}

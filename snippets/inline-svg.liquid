@@ -1,0 +1,8 @@
+{%- comment -%}
+  Render an asset-hosted SVG inline so we can recolor with `currentColor`.
+  Usage: {% render 'inline-svg', name: 'icon-bulb', class: 'feature__icon-svg' %}
+{%- endcomment -%}
+{%- assign svg = name | append: '.svg' | asset_url -%}
+<span class="inline-svg {{ class }}">
+  {{- svg | inline_asset_content -}}
+</span>

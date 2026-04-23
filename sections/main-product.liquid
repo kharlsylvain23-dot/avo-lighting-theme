@@ -1,0 +1,72 @@
+<section class="product-main">
+  <div class="product-main__inner">
+    <div class="product-main__media">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 1400 }}"
+             alt="{{ product.featured_image.alt | default: product.title | escape }}"
+             width="700" height="auto" loading="eager">
+      {%- else -%}
+        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1400&q=80"
+             alt="{{ product.title | default: 'Lamp' | escape }}"
+             width="700" height="auto" loading="eager" referrerpolicy="no-referrer">
+      {%- endif -%}
+
+      {%- if product.images.size > 1 -%}
+        <ul class="product-main__thumbs">
+          {%- for image in product.images limit: 6 -%}
+            <li><img src="{{ image | image_url: width: 200 }}" alt="" width="100" height="auto" loading="lazy"></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="product-main__details">
+      <h1 class="product-main__title">{{ product.title }}</h1>
+      <p class="product-main__price">{{ product.price | money }}</p>
+
+      {%- if product.description != blank -%}
+        <div class="product-main__desc rte">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- form 'product', product, id: 'product-form', class: 'product-main__form' -%}
+        {%- if product.has_only_default_variant == false -%}
+          {%- for option in product.options_with_values -%}
+            <label class="product-main__option-label" for="option-{{ forloop.index }}">{{ option.name }}</label>
+            <select id="option-{{ forloop.index }}" name="options[{{ option.name | escape }}]">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          {%- endfor -%}
+        {%- endif -%}
+
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <div class="product-main__qty">
+          <label for="qty">Qty</label>
+          <input id="qty" type="number" name="quantity" value="1" min="1">
+        </div>
+
+        <button type="submit" name="add" class="cta product-main__add"
+          {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+          {%- if product.selected_or_first_available_variant.available -%}
+            Add to cart
+          {%- else -%}
+            Sold out
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "section",
+  "class": "section-product",
+  "settings": [],
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Product" }]
+}
+{% endschema %}

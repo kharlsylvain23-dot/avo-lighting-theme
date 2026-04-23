@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "main":     { "type": "main-collection" },
+    "benefits": { "type": "benefits" },
+    "features": { "type": "features" }
+  },
+  "order": ["main", "benefits", "features"]
+}

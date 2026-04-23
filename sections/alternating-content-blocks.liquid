@@ -1,0 +1,61 @@
+<section class="alt-blocks">
+  <div class="alt-blocks__inner">
+    {%- assign stock_images = 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=1000&q=80|https://images.unsplash.com/photo-1524634126442-357e0eac3c14?auto=format&fit=crop&w=1000&q=80|https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1000&q=80|https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1000&q=80|https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&fit=crop&w=1000&q=80|https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=1000&q=80' | split: '|' -%}
+    {%- for block in section.blocks -%}
+      <div class="alt-block {% cycle 'alt-block--left', 'alt-block--right' %}" {{ block.shopify_attributes }}>
+        <div class="alt-block__media">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 1000 }}"
+                 alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                 width="500" height="auto" loading="lazy">
+          {%- else -%}
+            {%- assign idx = forloop.index0 | modulo: stock_images.size -%}
+            <img src="{{ stock_images[idx] }}"
+                 alt="{{ block.settings.title | escape }}"
+                 width="500" height="auto" loading="lazy"
+                 referrerpolicy="no-referrer">
+          {%- endif -%}
+        </div>
+        <div class="alt-block__copy">
+          <h2 class="alt-block__title">{{ block.settings.title }}</h2>
+          <div class="alt-block__content">{{ block.settings.content }}</div>
+          {%- if block.settings.cta_text != blank -%}
+            <a class="cta cta--ghost" href="{{ block.settings.cta_link }}">{{ block.settings.cta_text }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Alternating content",
+  "tag": "section",
+  "class": "section-alt-blocks",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "content_block",
+      "name": "Content block",
+      "settings": [
+        { "type": "text",         "id": "title",    "label": "Title", "default": "Crafted to last" },
+        { "type": "richtext",     "id": "content",  "label": "Content", "default": "<p>Solid brass, hand-finished glass, and a 5-year warranty.</p>" },
+        { "type": "image_picker", "id": "image",    "label": "Image" },
+        { "type": "text",         "id": "cta_text", "label": "CTA text" },
+        { "type": "url",          "id": "cta_link", "label": "CTA link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Alternating content",
+      "blocks": [
+        { "type": "content_block" },
+        { "type": "content_block", "settings": { "title": "Light that flatters", "content": "<p>Warm 2700K glow, fully dimmable.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

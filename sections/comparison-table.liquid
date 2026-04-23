@@ -1,0 +1,81 @@
+<section class="comparison">
+  <div class="comparison__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="comparison__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- assign cols = section.blocks | where: 'type', 'column' -%}
+    {%- assign rows = section.blocks | where: 'type', 'row' -%}
+
+    <div class="comparison__scroll">
+      <table class="comparison__table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            {%- for col in cols -%}
+              <th scope="col" class="{% if col.settings.highlight %}is-highlight{% endif %}">{{ col.settings.label }}</th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for row in rows -%}
+            <tr>
+              <th scope="row">{{ row.settings.label }}</th>
+              {%- assign values = row.settings.values | split: '|' -%}
+              {%- for col in cols -%}
+                {%- assign val = values[forloop.index0] | default: '—' | strip -%}
+                <td class="{% if col.settings.highlight %}is-highlight{% endif %}">
+                  {%- if val == 'yes' -%}<span aria-label="yes">✓</span>
+                  {%- elsif val == 'no' -%}<span aria-label="no">—</span>
+                  {%- else -%}{{ val }}{%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": "section",
+  "class": "section-comparison",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How we compare" }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        { "type": "text",     "id": "label",     "label": "Column label", "default": "Our lamp" },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight column", "default": false }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label",  "label": "Row label", "default": "Solid brass body" },
+        { "type": "text", "id": "values", "label": "Values (one per column, separated by |)", "info": "Use yes / no / or any text. Example: yes|no|no", "default": "yes|no|no" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "blocks": [
+        { "type": "column", "settings": { "label": "Our lamp", "highlight": true } },
+        { "type": "column", "settings": { "label": "Brand A" } },
+        { "type": "column", "settings": { "label": "Brand B" } },
+        { "type": "row" },
+        { "type": "row", "settings": { "label": "Touch dimming", "values": "yes|no|yes" } },
+        { "type": "row", "settings": { "label": "5-year warranty", "values": "yes|1 yr|1 yr" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

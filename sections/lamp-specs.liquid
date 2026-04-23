@@ -1,0 +1,105 @@
+{%- comment -%}
+  Lamp specs — reads a "lamp_spec" metaobject.
+  Define the metaobject in Shopify admin:
+    Settings → Custom data → Metaobjects → Add definition
+    Type: lamp_spec
+    Fields:
+      - label       (single_line_text_field)
+      - value       (single_line_text_field)
+      - icon        (file_reference, optional)
+      - display_order (integer, optional)
+  Then add entries (Material: Solid brass, Bulb: E26 2700K, etc.)
+  Pick which entries to show per block via the "entry" metaobject picker.
+{%- endcomment -%}
+
+<section class="specs">
+  <div class="specs__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="specs__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="specs__sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <ul class="specs__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign entry = block.settings.entry
+          assign label = ''
+          assign value = ''
+          assign icon  = nil
+
+          if entry != blank
+            assign label = entry.label.value | default: entry.system.handle
+            assign value = entry.value.value
+            assign icon  = entry.icon.value
+          endif
+
+          if block.settings.label_override != blank
+            assign label = block.settings.label_override
+          endif
+          if block.settings.value_override != blank
+            assign value = block.settings.value_override
+          endif
+        -%}
+        <li class="spec" {{ block.shopify_attributes }}>
+          <div class="spec__icon">
+            {%- if icon -%}
+              <img src="{{ icon | image_url: width: 96 }}" alt="" width="32" height="32" loading="lazy">
+            {%- else -%}
+              <span aria-hidden="true">◆</span>
+            {%- endif -%}
+          </div>
+          <dl class="spec__body">
+            <dt class="spec__label">{{ label }}</dt>
+            <dd class="spec__value">{{ value }}</dd>
+          </dl>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lamp specs",
+  "tag": "section",
+  "class": "section-specs",
+  "settings": [
+    { "type": "text", "id": "heading",    "label": "Heading",    "default": "Specifications" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Every detail, measured." }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "entry",
+          "label": "Metaobject entry",
+          "metaobject_type": "lamp_spec",
+          "info": "Pick a lamp_spec entry. Create the definition in Settings → Custom data → Metaobjects."
+        },
+        { "type": "text", "id": "label_override", "label": "Label override (optional)" },
+        { "type": "text", "id": "value_override", "label": "Value override (optional)" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Lamp specs",
+      "blocks": [
+        { "type": "spec", "settings": { "label_override": "Material",  "value_override": "Solid brass" } },
+        { "type": "spec", "settings": { "label_override": "Bulb",      "value_override": "E26 · 2700K · dimmable LED" } },
+        { "type": "spec", "settings": { "label_override": "Dimensions","value_override": "H 42 cm · Ø 18 cm" } },
+        { "type": "spec", "settings": { "label_override": "Weight",    "value_override": "1.8 kg" } },
+        { "type": "spec", "settings": { "label_override": "Power",     "value_override": "USB-C, 12V / 2A" } },
+        { "type": "spec", "settings": { "label_override": "Warranty",  "value_override": "5 years" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

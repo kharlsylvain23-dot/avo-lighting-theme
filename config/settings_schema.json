@@ -1,0 +1,38 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Blueprint",
+    "theme_version": "1.0.0",
+    "theme_author": "Blueprint",
+    "theme_documentation_url": "https://shopify.dev/docs/themes",
+    "theme_support_url": "https://shopify.dev/docs/themes"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "primary",   "label": "Primary (Black)",   "default": "#111111" },
+      { "type": "color", "id": "secondary", "label": "Secondary (White)", "default": "#ffffff" },
+      { "type": "color", "id": "gray",      "label": "Gray",              "default": "#e5e5e5" },
+      { "type": "color", "id": "accent",    "label": "Accent (White)",   "default": "#ffffff" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "body_font",    "label": "Body font",    "default": "assistant_n4" },
+      { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "assistant_n7" }
+    ]
+  },
+  {
+    "name": "Branding",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Max content width (px)", "min": 1000, "max": 1600, "step": 50, "default": 1280 }
+    ]
+  }
+]

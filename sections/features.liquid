@@ -1,0 +1,72 @@
+<section class="features">
+  <div class="features__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="features__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <ul class="features__grid">
+      {%- for block in section.blocks -%}
+        <li class="feature" {{ block.shopify_attributes }}>
+          <div class="feature__icon">
+            {%- if block.settings.icon != blank -%}
+              <img src="{{ block.settings.icon | image_url: width: 96 }}" alt="" width="48" height="48" loading="lazy">
+            {%- elsif block.settings.builtin_icon != 'none' -%}
+              {% render 'inline-svg', name: block.settings.builtin_icon %}
+            {%- else -%}
+              <span aria-hidden="true">★</span>
+            {%- endif -%}
+          </div>
+          <h3 class="feature__title">{{ block.settings.title }}</h3>
+          <p class="feature__desc">{{ block.settings.description }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features",
+  "tag": "section",
+  "class": "section-features",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Features" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon",        "label": "Custom icon (overrides built-in)" },
+        {
+          "type": "select",
+          "id": "builtin_icon",
+          "label": "Built-in icon",
+          "default": "icon-dimmer",
+          "options": [
+            { "value": "none",            "label": "None" },
+            { "value": "icon-bulb",       "label": "Bulb" },
+            { "value": "icon-dimmer",     "label": "Dimmer" },
+            { "value": "icon-glow",       "label": "Glow" },
+            { "value": "icon-shipping",   "label": "Shipping" },
+            { "value": "icon-usbc",       "label": "USB-C" },
+            { "value": "icon-warranty",   "label": "Warranty" }
+          ]
+        },
+        { "type": "text",         "id": "title",       "label": "Title", "default": "Touch dimming" },
+        { "type": "textarea",     "id": "description", "label": "Description", "default": "Tap the base to cycle through brightness levels." }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        { "type": "feature", "settings": { "builtin_icon": "icon-dimmer" } },
+        { "type": "feature", "settings": { "builtin_icon": "icon-usbc", "title": "USB-C powered", "description": "One cable. Anywhere in the home." } },
+        { "type": "feature", "settings": { "builtin_icon": "icon-glow", "title": "Warm glow",     "description": "2700K bulb included." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

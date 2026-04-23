@@ -1,0 +1,19 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "blocks": {
+        "logo":    { "type": "logo" },
+        "nav":     { "type": "nav" },
+        "search":  { "type": "search" },
+        "account": { "type": "account" },
+        "cart":    { "type": "cart" },
+        "toggle":  { "type": "theme_toggle" }
+      },
+      "block_order": ["logo", "nav", "search", "account", "cart", "toggle"]
+    }
+  },
+  "order": ["header"]
+}

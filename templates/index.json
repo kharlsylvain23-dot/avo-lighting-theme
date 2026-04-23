@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "New collection",
+        "headline": "Light, redefined.",
+        "subheadline": "A single sculptural lamp, crafted from solid materials and warm light.",
+        "cta_text": "Shop the lamp",
+        "bg_color": "#ffffff"
+      }
+    },
+    "steps": {
+      "type": "transformation-steps",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Choose your lamp",   "description": "Pick the size and finish that suits your room." } },
+        "s2": { "type": "step", "settings": { "title": "Place it",          "description": "Set it on a desk, console, or shelf." } },
+        "s3": { "type": "step", "settings": { "title": "Glow on",           "description": "Tap to dim. Sleep, work, and host beautifully." } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "alt": {
+      "type": "alternating-content-blocks",
+      "blocks": {
+        "a1": { "type": "content_block", "settings": { "title": "Crafted to last",     "content": "<p>Solid brass, hand-finished glass, and a 5-year warranty.</p>" } },
+        "a2": { "type": "content_block", "settings": { "title": "Light that flatters", "content": "<p>Warm 2700K glow, fully dimmable.</p>" } }
+      },
+      "block_order": ["a1", "a2"]
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "title": "Free shipping",    "description": "On all orders, always." } },
+        "b2": { "type": "benefit", "settings": { "title": "5-year warranty", "description": "Built to last a decade or more." } },
+        "b3": { "type": "benefit", "settings": { "title": "30-day returns",  "description": "Love it or send it back." } }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "features": {
+      "type": "features",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "title": "Touch dimming",  "description": "Tap the base to cycle through brightness levels." } },
+        "f2": { "type": "feature", "settings": { "title": "USB-C powered", "description": "One cable. Anywhere in the home." } },
+        "f3": { "type": "feature", "settings": { "title": "Warm glow",     "description": "2700K bulb included." } }
+      },
+      "block_order": ["f1", "f2", "f3"]
+    },
+    "social": {
+      "type": "social-proof",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "author": "Jane D.",   "content": "Easily the most beautiful lamp I own.", "rating": 5 } },
+        "r2": { "type": "review", "settings": { "author": "Marcus L.", "content": "Quality is unreal for the price.",        "rating": 5 } },
+        "r3": { "type": "review", "settings": { "author": "Sara P.",   "content": "It changed how my living room feels.",   "rating": 5 } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+    "compare": {
+      "type": "comparison-table",
+      "blocks": {
+        "c1": { "type": "column", "settings": { "label": "Our lamp", "highlight": true } },
+        "c2": { "type": "column", "settings": { "label": "Brand A" } },
+        "c3": { "type": "column", "settings": { "label": "Brand B" } },
+        "r1": { "type": "row",    "settings": { "label": "Solid brass body",  "values": "yes|no|no" } },
+        "r2": { "type": "row",    "settings": { "label": "Touch dimming",     "values": "yes|no|yes" } },
+        "r3": { "type": "row",    "settings": { "label": "5-year warranty",   "values": "yes|1 yr|1 yr" } }
+      },
+      "block_order": ["c1", "c2", "c3", "r1", "r2", "r3"]
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "What bulb does it use?",      "answer": "<p>Includes a 2700K dimmable LED bulb.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "How long does shipping take?", "answer": "<p>3–5 business days in the US.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "What is the return policy?",   "answer": "<p>30 days, no questions asked.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    },
+    "showcase": {
+      "type": "product-showcase",
+      "settings": { "heading": "Best sellers", "limit": 4 }
+    },
+    "specs": {
+      "type": "lamp-specs",
+      "blocks": {
+        "m":   { "type": "spec", "settings": { "label_override": "Material",   "value_override": "Solid brass" } },
+        "b":   { "type": "spec", "settings": { "label_override": "Bulb",       "value_override": "E26 · 2700K · dimmable LED" } },
+        "d":   { "type": "spec", "settings": { "label_override": "Dimensions", "value_override": "H 42 cm · Ø 18 cm" } },
+        "w":   { "type": "spec", "settings": { "label_override": "Weight",     "value_override": "1.8 kg" } },
+        "p":   { "type": "spec", "settings": { "label_override": "Power",      "value_override": "USB-C · 12V / 2A" } },
+        "y":   { "type": "spec", "settings": { "label_override": "Warranty",   "value_override": "5 years" } }
+      },
+      "block_order": ["m", "b", "d", "w", "p", "y"]
+    }
+  },
+  "order": ["hero", "steps", "alt", "benefits", "features", "social", "compare", "faq", "showcase", "specs"]
+}

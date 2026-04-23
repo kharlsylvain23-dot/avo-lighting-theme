@@ -1,0 +1,75 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'column' -%}
+          <div class="site-footer__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+            <div>{{ block.settings.content }}</div>
+          </div>
+        {%- when 'contact' -%}
+          <div class="site-footer__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+            <div>{{ block.settings.contact_info }}</div>
+          </div>
+        {%- when 'social' -%}
+          <div class="site-footer__col" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+            <div>{{ block.settings.social_links }}</div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="site-footer__legal">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'legal' -%}
+        <small {{ block.shopify_attributes }}>{{ block.settings.legal_text }}</small>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "section-footer",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text",     "id": "heading", "label": "Heading", "default": "Shop" },
+        { "type": "richtext", "id": "content", "label": "Content", "default": "<p><a href=\"/\">Home</a></p>" }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact",
+      "settings": [
+        { "type": "text",     "id": "heading",      "label": "Heading", "default": "Contact" },
+        { "type": "richtext", "id": "contact_info", "label": "Contact info", "default": "<p>hello@example.com</p>" }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Social",
+      "settings": [
+        { "type": "text",     "id": "heading",      "label": "Heading", "default": "Follow" },
+        { "type": "richtext", "id": "social_links", "label": "Social links", "default": "<p><a href=\"#\">Instagram</a></p>" }
+      ]
+    },
+    {
+      "type": "legal",
+      "name": "Legal",
+      "settings": [
+        { "type": "richtext", "id": "legal_text", "label": "Legal text", "default": "<p>© Lamp Co. All rights reserved.</p>" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}

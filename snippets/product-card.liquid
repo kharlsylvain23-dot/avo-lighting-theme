@@ -1,0 +1,36 @@
+{%- if product == blank or product == nil -%}
+  <div class="product-card product-card--placeholder">
+    <div class="product-card__media">
+      <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80"
+           alt="Lamp" width="300" height="300" loading="lazy" referrerpolicy="no-referrer">
+    </div>
+    <div class="product-card__body">
+      <h3 class="product-card__title">Atelier Lamp</h3>
+      <p class="product-card__price">$249.00</p>
+    </div>
+  </div>
+{%- else -%}
+  <a class="product-card" href="{{ product.url }}">
+    <div class="product-card__media">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 600 }}"
+             alt="{{ product.featured_image.alt | default: product.title | escape }}"
+             width="300" height="auto" loading="lazy">
+      {%- else -%}
+        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80"
+             alt="{{ product.title | escape }}"
+             width="300" height="300" loading="lazy" referrerpolicy="no-referrer">
+      {%- endif -%}
+    </div>
+    <div class="product-card__body">
+      <h3 class="product-card__title">{{ product.title }}</h3>
+      <p class="product-card__price">
+        {%- if product.price_varies -%}
+          From {{ product.price_min | money }}
+        {%- else -%}
+          {{ product.price | money }}
+        {%- endif -%}
+      </p>
+    </div>
+  </a>
+{%- endif -%}

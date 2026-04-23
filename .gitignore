@@ -1,0 +1,20 @@
+# Shopify CLI
+.shopifyignore
+.shopify-cli.yml
+*.log
+.DS_Store
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+
+# Node / build (if used by tooling)
+node_modules/
+dist/
+.cache/
+
+# Environment
+.env
+.env.*

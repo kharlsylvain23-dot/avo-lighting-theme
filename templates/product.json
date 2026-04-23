@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main":     { "type": "main-product" },
+    "specs":    { "type": "lamp-specs" },
+    "social":   { "type": "social-proof" },
+    "features": { "type": "features" },
+    "faq":      { "type": "faq" },
+    "showcase": { "type": "product-showcase", "settings": { "heading": "You may also like", "limit": 4 } }
+  },
+  "order": ["main", "specs", "features", "social", "faq", "showcase"]
+}

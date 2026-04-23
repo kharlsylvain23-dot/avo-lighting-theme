@@ -1,0 +1,48 @@
+<section class="hero" style="background:{{ section.settings.bg_color }}">
+  <div class="hero__inner">
+    <div class="hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="hero__headline">{{ section.settings.headline | default: 'Light, redefined.' }}</h1>
+      {%- if section.settings.subheadline != blank -%}
+        <p class="hero__sub">{{ section.settings.subheadline }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_text != blank -%}
+        <a class="cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+    <div class="hero__media">
+      {%- if section.settings.lamp_image != blank -%}
+        <img src="{{ section.settings.lamp_image | image_url: width: 1200 }}"
+             alt="{{ section.settings.lamp_image.alt | default: section.settings.headline | escape }}"
+             width="600" height="auto" loading="eager">
+      {%- else -%}
+        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1200&q=80"
+             alt="{{ section.settings.headline | default: 'Sculptural lamp' | escape }}"
+             width="600" height="auto" loading="eager"
+             referrerpolicy="no-referrer">
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    { "type": "text",         "id": "eyebrow",     "label": "Eyebrow", "default": "New collection" },
+    { "type": "text",         "id": "headline",    "label": "Headline", "default": "Light, redefined." },
+    { "type": "textarea",     "id": "subheadline", "label": "Subheadline", "default": "A single sculptural lamp, crafted from solid materials and warm light." },
+    { "type": "image_picker", "id": "lamp_image",  "label": "Lamp image" },
+    { "type": "text",         "id": "cta_text",    "label": "CTA text",  "default": "Shop the lamp" },
+    { "type": "url",          "id": "cta_link",    "label": "CTA link" },
+    { "type": "color",        "id": "bg_color",    "label": "Background", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

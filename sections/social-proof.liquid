@@ -1,0 +1,63 @@
+<section class="social-proof">
+  <div class="social-proof__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="social-proof__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="social-proof__grid">
+      {%- assign stock_avatars = 'https://i.pravatar.cc/80?img=12|https://i.pravatar.cc/80?img=32|https://i.pravatar.cc/80?img=47|https://i.pravatar.cc/80?img=5|https://i.pravatar.cc/80?img=15|https://i.pravatar.cc/80?img=23' | split: '|' -%}
+      {%- for block in section.blocks -%}
+        <figure class="review" {{ block.shopify_attributes }}>
+          {%- if block.settings.rating > 0 -%}
+            <div class="review__rating" aria-label="{{ block.settings.rating }} out of 5">
+              {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+            </div>
+          {%- endif -%}
+          <blockquote class="review__quote">{{ block.settings.content }}</blockquote>
+          <figcaption class="review__author">
+            {%- if block.settings.avatar != blank -%}
+              <img src="{{ block.settings.avatar | image_url: width: 80 }}" alt="" width="40" height="40" loading="lazy">
+            {%- else -%}
+              {%- assign idx = forloop.index0 | modulo: stock_avatars.size -%}
+              <img src="{{ stock_avatars[idx] }}" alt="" width="40" height="40" loading="lazy" referrerpolicy="no-referrer">
+            {%- endif -%}
+            <span>{{ block.settings.author }}</span>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social proof",
+  "tag": "section",
+  "class": "section-social-proof",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by 10,000+ homes" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text",         "id": "author",  "label": "Author", "default": "Jane D." },
+        { "type": "textarea",     "id": "content", "label": "Content", "default": "Easily the most beautiful lamp I own." },
+        { "type": "image_picker", "id": "avatar",  "label": "Avatar" },
+        { "type": "range",        "id": "rating",  "label": "Rating", "min": 0, "max": 5, "step": 1, "default": 5 }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Social proof",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review", "settings": { "author": "Marcus L.", "content": "Quality is unreal for the price." } },
+        { "type": "review", "settings": { "author": "Sara P.",   "content": "It changed how my living room feels." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

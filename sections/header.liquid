@@ -1,0 +1,113 @@
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'logo' -%}
+          <a href="{{ routes.root_url }}" class="site-header__logo" {{ block.shopify_attributes }}>
+            {%- if block.settings.logo != blank -%}
+              <img src="{{ block.settings.logo | image_url: width: 240 }}"
+                   alt="{{ shop.name | escape }}"
+                   width="120" height="auto" loading="eager">
+            {%- else -%}
+              <span class="site-header__logo-text">{{ shop.name }}</span>
+            {%- endif -%}
+          </a>
+
+        {%- when 'nav' -%}
+          <nav class="site-header__nav" aria-label="Primary" {{ block.shopify_attributes }}>
+            <ul>
+              {%- for link in linklists[block.settings.menu].links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+        {%- when 'search' -%}
+          <form action="{{ routes.search_url }}" method="get" role="search" class="site-header__search" {{ block.shopify_attributes }}>
+            <label class="visually-hidden" for="header-search">Search</label>
+            <input id="header-search" type="search" name="q" placeholder="{{ block.settings.placeholder | default: 'Search' }}">
+          </form>
+
+        {%- when 'account' -%}
+          <a href="{{ routes.account_url }}" class="site-header__account" {{ block.shopify_attributes }}>
+            {{ block.settings.label | default: 'Account' }}
+          </a>
+
+        {%- when 'cart' -%}
+          <a href="{{ routes.cart_url }}" class="site-header__cart" {{ block.shopify_attributes }}>
+            {{ block.settings.label | default: 'Cart' }}
+            <span class="site-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+          </a>
+
+        {%- when 'theme_toggle' -%}
+          <button type="button"
+                  class="theme-toggle"
+                  data-theme-toggle
+                  aria-label="Toggle dark mode"
+                  title="Toggle dark mode"
+                  {{ block.shopify_attributes }}>
+            <svg class="icon-sun"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          </button>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "section-header",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "Logo image" }
+      ]
+    },
+    {
+      "type": "nav",
+      "name": "Navigation",
+      "limit": 1,
+      "settings": [
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "Search",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Search lamps…" }
+      ]
+    },
+    {
+      "type": "account",
+      "name": "Account",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Account" }
+      ]
+    },
+    {
+      "type": "cart",
+      "name": "Cart",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Cart" }
+      ]
+    },
+    {
+      "type": "theme_toggle",
+      "name": "Dark mode toggle",
+      "limit": 1,
+      "settings": []
+    }
+  ],
+  "presets": [{ "name": "Header" }]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+# See https://shopify.dev/docs/themes/tools/theme-check
+root: "."
+ignore:
+  - node_modules/
+  - dist/
+
+TemplateLength:
+  enabled: true
+  max_length: 500
+
+UnusedAssign:
+  enabled: true
+
+UnusedSnippet:
+  enabled: true
+
+DeprecatedFilter:
+  enabled: true
+
+ParserBlockingJavaScript:
+  enabled: true
+
+AssetSizeJavaScript:
+  enabled: true
+  threshold_in_bytes: 100000
+
+AssetSizeCSS:
+  enabled: true
+  threshold_in_bytes: 100000
