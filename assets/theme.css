@@ -166,9 +166,9 @@ a:hover { text-decoration: underline; text-decoration-color: currentColor; text-
 }
 .hero__eyebrow {
   text-transform: uppercase; font-size: 0.8rem;
-  letter-spacing: 0.18em; color: var(--color-gray-700); margin: 0 0 12px;
+  letter-spacing: 0.18em; color: var(--color-primary); margin: 0 0 12px;
 }
-.hero__sub { color: var(--color-gray-700); font-size: 1.1rem; max-width: 48ch; }
+.hero__sub { color: var(--color-primary); font-size: 1.1rem; max-width: 48ch; }
 .hero__media img { border-radius: var(--radius); }
 
 /* ============ Steps ============ */
