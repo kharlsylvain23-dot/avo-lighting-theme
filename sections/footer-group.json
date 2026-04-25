@@ -9,7 +9,7 @@
         "support": { "type": "column", "settings": { "heading": "Support", "content": "<p><a href=\"/pages/contact\">Contact</a></p><p><a href=\"/pages/shipping\">Shipping & returns</a></p><p><a href=\"/pages/warranty\">Warranty</a></p>" } },
         "contact": { "type": "contact", "settings": { "heading": "Contact", "contact_info": "<p>hello@avolighting.co</p><p>Mon\u2013Fri, 9\u20135 ET</p>" } },
         "social":  { "type": "social",  "settings": { "heading": "Follow",  "social_links": "<p><a href=\"#\">Instagram</a></p><p><a href=\"#\">TikTok</a></p>" } },
-        "legal":   { "type": "legal",   "settings": { "legal_text": "\u00a9 {{ 'now' | date: '%Y' }} Avo Lighting Co. \u00b7 Designed for the apartment, made to outlive it." } }
+        "legal":   { "type": "legal",   "settings": { "legal_text": "\u00a9 2026 Avo Lighting Co. \u00b7 Designed for the apartment, made to outlive it." } }
       },
       "block_order": ["shop", "support", "contact", "social", "legal"]
     }
