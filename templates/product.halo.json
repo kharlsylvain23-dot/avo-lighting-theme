@@ -1,0 +1,105 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "eyebrow": "Avo · Halo",
+        "subtitle": "A smoked-glass mushroom lamp on a brushed-chrome base. Plug it in, kill the overhead, and the room exhales.",
+        "cta_text": "Add the Halo to cart",
+        "show_trust": true,
+        "fallback_title": "The Halo",
+        "fallback_price": 24900,
+        "fallback_description": "<p>Hand-blown smoked glass softens a 2700K spiral filament into the warm pool of light a rented apartment is missing. Weighted brushed-chrome base. Tap to dim. Plug-in &mdash; no hardwiring, no landlord conversation.</p>"
+      },
+      "blocks": {
+        "what": { "type": "detail", "settings": { "heading": "What's in the box", "content": "<ul><li>The Halo lamp (smoked glass dome + brushed-chrome base)</li><li>2700K E26 spiral filament LED bulb</li><li>6ft fabric-wrapped cord with inline switch</li><li>Placement guide</li><li>5-year warranty card</li></ul>" } },
+        "size": { "type": "detail", "settings": { "heading": "Dimensions & materials", "content": "<p><strong>Shade:</strong> Hand-blown smoked glass, 28&nbsp;cm wide.<br><strong>Base:</strong> Brushed chrome, weighted, 9&nbsp;cm.<br><strong>Total height:</strong> 24&nbsp;cm.<br><strong>Weight:</strong> 2.4&nbsp;kg.<br><strong>Bulb socket:</strong> Standard E26.<br><strong>Power:</strong> Standard plug-in, 6ft cord, inline switch.</p>" } },
+        "ship": { "type": "detail", "settings": { "heading": "Shipping & returns", "content": "<p>Free tracked shipping in the US, 3&ndash;5 business days. International rates calculated at checkout.</p><p><strong>30-night home trial.</strong> Live with it for a month. If it isn't right, send it back for a full refund &mdash; we cover return shipping and don't ask why. Box is destroyed? We'll still take it.</p>" } },
+        "warr": { "type": "detail", "settings": { "heading": "5-year warranty", "content": "<p>Anything fails &mdash; cord, dimmer, glass crack from normal handling &mdash; we replace it. The Halo is built to outlive three apartments and a house.</p>" } },
+        "made": { "type": "detail", "settings": { "heading": "How it's made", "content": "<p>Each shade is hand-blown and hand-tinted by a small workshop. Every piece carries tiny variations in the smoke &mdash; that's how you know it's real glass and not press-molded plastic. Final assembly happens before shipping; we test every cord and dimmer.</p>" } }
+      },
+      "block_order": ["what", "size", "ship", "warr", "made"]
+    },
+
+    "alt": {
+      "type": "alternating-content-blocks",
+      "blocks": {
+        "a1": { "type": "content_block", "settings": { "title": "Designed for the apartment. Made to outlive it.",  "content": "<p>You can't paint the walls. You can't change the overhead light. So we built one object that changes the whole room. Smoked glass, brushed chrome, warm spiral filament &mdash; set it down and the apartment finally feels lived-in.</p>" } },
+        "a2": { "type": "content_block", "settings": { "title": "Plug it in. That's the whole installation.",        "content": "<p>No drilling. No hardwiring. No landlord. Standard outlet, 6ft cord, inline switch. When you move, you take it with you.</p>" } },
+        "a3": { "type": "content_block", "settings": { "title": "Light that flatters everything in the photo",         "content": "<p>2700K spiral filament behind smoked glass. The harsh point of light gets eaten by the tint, and what comes out is the same warm glow that golden hour leaves on a wall at 6:47pm. iPhone cameras love it.</p>" } }
+      },
+      "block_order": ["a1", "a2", "a3"]
+    },
+
+    "specs": {
+      "type": "lamp-specs",
+      "blocks": {
+        "m":   { "type": "spec", "settings": { "label_override": "Shade",      "value_override": "Hand-blown smoked glass" } },
+        "b2":  { "type": "spec", "settings": { "label_override": "Base",       "value_override": "Brushed chrome, weighted" } },
+        "b":   { "type": "spec", "settings": { "label_override": "Bulb",       "value_override": "E26 · 2700K · spiral filament LED (included)" } },
+        "d":   { "type": "spec", "settings": { "label_override": "Dimensions", "value_override": "H 24 cm · Ø 28 cm" } },
+        "w":   { "type": "spec", "settings": { "label_override": "Weight",     "value_override": "2.4 kg" } },
+        "p":   { "type": "spec", "settings": { "label_override": "Power",      "value_override": "Plug-in · 6ft cord · inline switch" } },
+        "y":   { "type": "spec", "settings": { "label_override": "Warranty",   "value_override": "5 years" } }
+      },
+      "block_order": ["m", "b2", "b", "d", "w", "p", "y"]
+    },
+
+    "features": {
+      "type": "features",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "title": "Tap to dim",            "description": "Three brightness levels. Touch the chrome base to cycle." } },
+        "f2": { "type": "feature", "settings": { "title": "Plug-in, anywhere",     "description": "Standard outlet. 6ft fabric-wrapped cord. No hardwiring." } },
+        "f3": { "type": "feature", "settings": { "title": "Warm spiral filament",  "description": "2700K E26 LED, included. Visible behind smoked glass, not hidden." } }
+      },
+      "block_order": ["f1", "f2", "f3"]
+    },
+
+    "social": {
+      "type": "social-proof",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "author": "Jane D., Brooklyn",     "content": "I've moved four times in five years. The Halo is the only thing in every photo.",      "rating": 5 } },
+        "r2": { "type": "review", "settings": { "author": "Marcus L., Austin",      "content": "Killed the overhead the day it arrived. Haven't turned it back on since.",          "rating": 5 } },
+        "r3": { "type": "review", "settings": { "author": "Sara P., Los Angeles",   "content": "My boyfriend asked if I'd had the apartment professionally lit. It's one lamp.",   "rating": 5 } }
+      },
+      "block_order": ["r1", "r2", "r3"]
+    },
+
+    "compare": {
+      "type": "comparison-table",
+      "blocks": {
+        "c1": { "type": "column", "settings": { "label": "Avo Halo",   "highlight": true } },
+        "c2": { "type": "column", "settings": { "label": "IKEA" } },
+        "c3": { "type": "column", "settings": { "label": "West Elm" } },
+        "r1": { "type": "row",    "settings": { "label": "Hand-blown smoked glass",  "values": "yes|no|sometimes" } },
+        "r2": { "type": "row",    "settings": { "label": "Touch dimming",            "values": "yes|no|no" } },
+        "r3": { "type": "row",    "settings": { "label": "Plug-in (no hardwiring)",  "values": "yes|yes|no" } },
+        "r4": { "type": "row",    "settings": { "label": "5-year warranty",          "values": "yes|1 yr|2 yr" } },
+        "r5": { "type": "row",    "settings": { "label": "30-night trial",           "values": "yes|14 days|30 days" } }
+      },
+      "block_order": ["c1", "c2", "c3", "r1", "r2", "r3", "r4", "r5"]
+    },
+
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Do I need to install anything?",            "answer": "<p>No. The Halo plugs into any standard outlet. No hardwiring, no drilling, no landlord conversation.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Will it be bright enough as my main light?", "answer": "<p>Honest answer: the Halo is a mood and task lamp, not a ceiling replacement. In a small studio, pair it with a second to fully ditch the overhead. In a 1-bed, one Halo handles the living-room corner beautifully.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Is the smoked glass actually glass?",         "answer": "<p>Yes. Hand-blown, hand-tinted. Each one has tiny variations in the smoke &mdash; that's how you know it's real and not press-molded plastic.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "What if it breaks in the mail?",              "answer": "<p>Send a photo of the box and we ship a replacement same-day. No forms, no phone trees.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "Does it use a weird proprietary bulb?",       "answer": "<p>No. Standard E26 socket. The 2700K spiral filament LED is in the box, but any 2700K filament bulb works if you ever want to swap.</p>" } },
+        "q6": { "type": "faq", "settings": { "question": "What if I move and it breaks?",               "answer": "<p>The 5-year warranty covers normal wear, including transit damage during a move. The plug-in design means there's no fixture to disassemble &mdash; the whole thing tucks into a moving box.</p>" } },
+        "q7": { "type": "faq", "settings": { "question": "What if I don't like it?",                    "answer": "<p>Send it back within 30 nights for a full refund. We cover return shipping. Box is destroyed? We'll still take it.</p>" } },
+        "q8": { "type": "faq", "settings": { "question": "How long does shipping take?",                "answer": "<p>3&ndash;5 business days in the US, free and tracked. International rates calculated at checkout.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"]
+    },
+
+    "showcase": {
+      "type": "product-showcase",
+      "settings": { "heading": "More from Avo", "limit": 4 }
+    }
+  },
+
+  "order": ["main", "alt", "specs", "features", "social", "compare", "faq", "showcase"]
+}
