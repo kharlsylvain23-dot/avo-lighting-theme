@@ -1,6 +1,13 @@
-# Blueprint — Shopify Online Store 2.0 Theme
+# Avo Lighting — Shopify Online Store 2.0 Theme
 
-A minimalist, classy single-product Shopify theme designed for a lamp store.
+A minimalist, single-product Shopify theme for **Avo Lighting Co.** built around
+**The Halo** — a smoked-glass mushroom table lamp on a brushed-chrome base.
+
+Positioning follows the *Mark Builds Brands* purple-ocean playbook: instead of
+selling "a lamp," the store sells "the one beautiful object that makes a rented
+apartment finally feel like yours" — a hyper-specific demographic (design-forward
+renters) inside a proven category.
+
 Monochrome palette — black, white, and gray, with a pure-white accent so nothing
 competes with the product. Dark mode ships out of the box via an icon toggle in
 the header that remembers the visitor's choice and respects `prefers-color-scheme`.

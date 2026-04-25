@@ -3,93 +3,98 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "New collection",
-        "headline": "Light, redefined.",
-        "subheadline": "A single sculptural lamp, crafted from solid materials and warm light.",
-        "cta_text": "Shop the lamp",
+        "eyebrow": "Avo · Halo",
+        "headline": "Your apartment finally looks like yours.",
+        "subheadline": "You can't paint the walls. You can't change the overhead light. So we built one object that changes the whole room. Smoked glass, brushed chrome, warm spiral filament — set it down and the apartment feels lived-in for the first time.",
+        "cta_text": "Shop the Halo",
         "bg_color": "#ffffff"
       }
     },
     "steps": {
       "type": "transformation-steps",
       "blocks": {
-        "s1": { "type": "step", "settings": { "title": "Choose your lamp",   "description": "Pick the size and finish that suits your room." } },
-        "s2": { "type": "step", "settings": { "title": "Place it",          "description": "Set it on a desk, console, or shelf." } },
-        "s3": { "type": "step", "settings": { "title": "Glow on",           "description": "Tap to dim. Sleep, work, and host beautifully." } }
+        "s1": { "type": "step", "settings": { "title": "Kill the overhead light",   "description": "That cold ceiling fixture is what makes a rental feel like a rental. Turn it off." } },
+        "s2": { "type": "step", "settings": { "title": "Set the Halo down",          "description": "Side table, desk, nightstand, kitchen counter — wherever the light needs to live." } },
+        "s3": { "type": "step", "settings": { "title": "Welcome home",                "description": "Smoked glass softens the bulb. Warm light pools on the surface. The room exhales." } }
       },
       "block_order": ["s1", "s2", "s3"]
     },
     "alt": {
       "type": "alternating-content-blocks",
       "blocks": {
-        "a1": { "type": "content_block", "settings": { "title": "Crafted to last",     "content": "<p>Solid brass, hand-finished glass, and a 5-year warranty.</p>" } },
-        "a2": { "type": "content_block", "settings": { "title": "Light that flatters", "content": "<p>Warm 2700K glow, fully dimmable.</p>" } }
+        "a1": { "type": "content_block", "settings": { "title": "Built like an object, not a fixture",     "content": "<p>Hand-blown smoked glass dome. Solid brushed-chrome base, weighted so it doesn't slide. The kind of piece you keep across three apartments and one house.</p>" } },
+        "a2": { "type": "content_block", "settings": { "title": "Light that flatters everything",          "content": "<p>2700K spiral filament behind smoked glass. The harsh edge gets eaten by the tint, and what comes out is the same warm glow that golden hour leaves on a wall at 6:47pm.</p>" } },
+        "a3": { "type": "content_block", "settings": { "title": "One cable. No drilling. No landlord.",   "content": "<p>Plugs into any outlet. No hardwiring, no holes in the wall, no permission required. When you move, you take it with you.</p>" } }
       },
-      "block_order": ["a1", "a2"]
+      "block_order": ["a1", "a2", "a3"]
     },
     "benefits": {
       "type": "benefits",
       "blocks": {
-        "b1": { "type": "benefit", "settings": { "title": "Free shipping",    "description": "On all orders, always." } },
-        "b2": { "type": "benefit", "settings": { "title": "5-year warranty", "description": "Built to last a decade or more." } },
-        "b3": { "type": "benefit", "settings": { "title": "30-day returns",  "description": "Love it or send it back." } }
+        "b1": { "type": "benefit", "settings": { "title": "Free shipping",    "description": "Tracked delivery, included." } },
+        "b2": { "type": "benefit", "settings": { "title": "5-year warranty", "description": "If anything fails, we replace it." } },
+        "b3": { "type": "benefit", "settings": { "title": "30-night trial",  "description": "Live with it for a month. Send it back if it isn't right." } }
       },
       "block_order": ["b1", "b2", "b3"]
     },
     "features": {
       "type": "features",
       "blocks": {
-        "f1": { "type": "feature", "settings": { "title": "Touch dimming",  "description": "Tap the base to cycle through brightness levels." } },
-        "f2": { "type": "feature", "settings": { "title": "USB-C powered", "description": "One cable. Anywhere in the home." } },
-        "f3": { "type": "feature", "settings": { "title": "Warm glow",     "description": "2700K bulb included." } }
+        "f1": { "type": "feature", "settings": { "title": "Tap to dim",            "description": "Three brightness levels. Touch the chrome base to cycle." } },
+        "f2": { "type": "feature", "settings": { "title": "Plug-in, anywhere",     "description": "Standard outlet. 6ft cord. No hardwiring." } },
+        "f3": { "type": "feature", "settings": { "title": "Warm spiral filament",  "description": "2700K E26 LED included. Visible, not hidden." } }
       },
       "block_order": ["f1", "f2", "f3"]
     },
     "social": {
       "type": "social-proof",
       "blocks": {
-        "r1": { "type": "review", "settings": { "author": "Jane D.",   "content": "Easily the most beautiful lamp I own.", "rating": 5 } },
-        "r2": { "type": "review", "settings": { "author": "Marcus L.", "content": "Quality is unreal for the price.",        "rating": 5 } },
-        "r3": { "type": "review", "settings": { "author": "Sara P.",   "content": "It changed how my living room feels.",   "rating": 5 } }
+        "r1": { "type": "review", "settings": { "author": "Jane D., Brooklyn",     "content": "I've moved four times in five years. The Halo is the only thing in every photo.",      "rating": 5 } },
+        "r2": { "type": "review", "settings": { "author": "Marcus L., Austin",      "content": "Killed the overhead the day it arrived. Haven't turned it back on since.",          "rating": 5 } },
+        "r3": { "type": "review", "settings": { "author": "Sara P., Los Angeles",   "content": "My boyfriend asked if I'd had the apartment professionally lit. It's one lamp.",   "rating": 5 } }
       },
       "block_order": ["r1", "r2", "r3"]
     },
     "compare": {
       "type": "comparison-table",
       "blocks": {
-        "c1": { "type": "column", "settings": { "label": "Our lamp", "highlight": true } },
-        "c2": { "type": "column", "settings": { "label": "Brand A" } },
-        "c3": { "type": "column", "settings": { "label": "Brand B" } },
-        "r1": { "type": "row",    "settings": { "label": "Solid brass body",  "values": "yes|no|no" } },
-        "r2": { "type": "row",    "settings": { "label": "Touch dimming",     "values": "yes|no|yes" } },
-        "r3": { "type": "row",    "settings": { "label": "5-year warranty",   "values": "yes|1 yr|1 yr" } }
+        "c1": { "type": "column", "settings": { "label": "Avo Halo",   "highlight": true } },
+        "c2": { "type": "column", "settings": { "label": "IKEA" } },
+        "c3": { "type": "column", "settings": { "label": "West Elm" } },
+        "r1": { "type": "row",    "settings": { "label": "Hand-blown smoked glass",  "values": "yes|no|sometimes" } },
+        "r2": { "type": "row",    "settings": { "label": "Touch dimming",            "values": "yes|no|no" } },
+        "r3": { "type": "row",    "settings": { "label": "5-year warranty",          "values": "yes|1 yr|2 yr" } },
+        "r4": { "type": "row",    "settings": { "label": "30-night trial",           "values": "yes|14 days|30 days" } }
       },
-      "block_order": ["c1", "c2", "c3", "r1", "r2", "r3"]
+      "block_order": ["c1", "c2", "c3", "r1", "r2", "r3", "r4"]
     },
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": { "type": "faq", "settings": { "question": "What bulb does it use?",      "answer": "<p>Includes a 2700K dimmable LED bulb.</p>" } },
-        "q2": { "type": "faq", "settings": { "question": "How long does shipping take?", "answer": "<p>3–5 business days in the US.</p>" } },
-        "q3": { "type": "faq", "settings": { "question": "What is the return policy?",   "answer": "<p>30 days, no questions asked.</p>" } }
+        "q1": { "type": "faq", "settings": { "question": "Do I need to install anything?",        "answer": "<p>No. The Halo plugs into any standard outlet. No hardwiring, no drilling, no landlord conversation.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "What bulb does it use?",                "answer": "<p>A 2700K dimmable E26 LED with a visible spiral filament — included in the box.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Is the smoked glass actually glass?",   "answer": "<p>Yes. Hand-blown, hand-tinted. Each one has tiny variations in the smoke — that's how you know it's real.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "How long does shipping take?",          "answer": "<p>3–5 business days in the US, free.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "What if I don't like it?",              "answer": "<p>Send it back within 30 nights for a full refund. We'll cover return shipping.</p>" } }
       },
-      "block_order": ["q1", "q2", "q3"]
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
     },
     "showcase": {
       "type": "product-showcase",
-      "settings": { "heading": "Best sellers", "limit": 4 }
+      "settings": { "heading": "The Halo", "limit": 4 }
     },
     "specs": {
       "type": "lamp-specs",
       "blocks": {
-        "m":   { "type": "spec", "settings": { "label_override": "Material",   "value_override": "Solid brass" } },
-        "b":   { "type": "spec", "settings": { "label_override": "Bulb",       "value_override": "E26 · 2700K · dimmable LED" } },
-        "d":   { "type": "spec", "settings": { "label_override": "Dimensions", "value_override": "H 42 cm · Ø 18 cm" } },
-        "w":   { "type": "spec", "settings": { "label_override": "Weight",     "value_override": "1.8 kg" } },
-        "p":   { "type": "spec", "settings": { "label_override": "Power",      "value_override": "USB-C · 12V / 2A" } },
+        "m":   { "type": "spec", "settings": { "label_override": "Shade",      "value_override": "Hand-blown smoked glass" } },
+        "b2":  { "type": "spec", "settings": { "label_override": "Base",       "value_override": "Brushed chrome, weighted" } },
+        "b":   { "type": "spec", "settings": { "label_override": "Bulb",       "value_override": "E26 · 2700K · spiral filament LED" } },
+        "d":   { "type": "spec", "settings": { "label_override": "Dimensions", "value_override": "H 24 cm · Ø 28 cm" } },
+        "w":   { "type": "spec", "settings": { "label_override": "Weight",     "value_override": "2.4 kg" } },
+        "p":   { "type": "spec", "settings": { "label_override": "Power",      "value_override": "Plug-in · 6ft cord · inline switch" } },
         "y":   { "type": "spec", "settings": { "label_override": "Warranty",   "value_override": "5 years" } }
       },
-      "block_order": ["m", "b", "d", "w", "p", "y"]
+      "block_order": ["m", "b2", "b", "d", "w", "p", "y"]
     }
   },
   "order": ["hero", "steps", "alt", "benefits", "features", "social", "compare", "faq", "showcase", "specs"]
