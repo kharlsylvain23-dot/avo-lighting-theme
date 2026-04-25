@@ -1,84 +1,149 @@
-<section class="product-main">
-  <div class="product-main__inner">
-    <div class="product-main__media">
-      {%- if product.featured_image -%}
-        <img src="{{ product.featured_image | image_url: width: 1400 }}"
-             alt="{{ product.featured_image.alt | default: product.title | escape }}"
-             width="700" height="auto" loading="eager">
-      {%- else -%}
-        <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1400&q=80"
-             alt="{{ product.title | default: 'Lamp' | escape }}"
-             width="700" height="auto" loading="eager" referrerpolicy="no-referrer">
-      {%- endif -%}
+<section class="pdp" data-pdp>
+  <div class="pdp__inner">
+
+    <div class="pdp__gallery">
+      <div class="pdp__main-image">
+        {%- assign first_image = product.featured_image | default: product.images.first -%}
+        {%- if first_image -%}
+          <img id="pdp-main-img"
+               src="{{ first_image | image_url: width: 1400 }}"
+               alt="{{ first_image.alt | default: product.title | escape }}"
+               width="1400" height="1750" loading="eager">
+        {%- else -%}
+          <img id="pdp-main-img"
+               src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=1400&q=85"
+               alt="{{ product.title | default: section.settings.fallback_title | escape }}"
+               width="1400" height="1750" loading="eager" referrerpolicy="no-referrer">
+        {%- endif -%}
+      </div>
 
       {%- if product.images.size > 1 -%}
-        <ul class="product-main__thumbs">
+        <div class="pdp__thumbs" role="tablist" aria-label="Product images">
           {%- for image in product.images limit: 6 -%}
-            <li><img src="{{ image | image_url: width: 200 }}" alt="" width="100" height="auto" loading="lazy"></li>
+            <button type="button" class="pdp__thumb"
+                    {% if forloop.first %}aria-current="true"{% else %}aria-current="false"{% endif %}
+                    data-img="{{ image | image_url: width: 1400 }}">
+              <img src="{{ image | image_url: width: 300 }}" alt="{{ image.alt | escape }}" loading="lazy">
+            </button>
           {%- endfor -%}
-        </ul>
+        </div>
+      {%- elsif product == blank -%}
+        {%- assign demo_thumbs = 'photo-1513506003901-1e6a229e2d15,photo-1507473885765-e6ed057f782c,photo-1524634126442-357e0eac3c14,photo-1540932239986-30128078f3c5' | split: ',' -%}
+        <div class="pdp__thumbs" role="tablist" aria-label="Product images">
+          {%- for slug in demo_thumbs -%}
+            <button type="button" class="pdp__thumb"
+                    {% if forloop.first %}aria-current="true"{% else %}aria-current="false"{% endif %}
+                    data-img="https://images.unsplash.com/{{ slug }}?auto=format&fit=crop&w=1400&q=85">
+              <img src="https://images.unsplash.com/{{ slug }}?auto=format&fit=crop&w=300&q=80" alt="" loading="lazy" referrerpolicy="no-referrer">
+            </button>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
     </div>
 
-    <div class="product-main__details">
+    <div class="pdp__info">
       {%- if section.settings.eyebrow != blank -%}
-        <p class="product-main__eyebrow">{{ section.settings.eyebrow }}</p>
+        <p class="pdp__crumbs">{{ section.settings.eyebrow }} &nbsp;/&nbsp; {{ product.title | default: section.settings.fallback_title }}</p>
       {%- endif -%}
-      <h1 class="product-main__title">{{ product.title | default: section.settings.fallback_title }}</h1>
+
+      <h1 class="pdp__title">{{ product.title | default: section.settings.fallback_title }}</h1>
+
+      {%- if section.settings.show_rating -%}
+        <div class="pdp__rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>{{ section.settings.rating_text | default: '4.9 · 312 reviews' }}</span>
+        </div>
+      {%- endif -%}
+
+      <p class="pdp__price">
+        {%- if product != blank -%}
+          {{ product.price | money }}
+        {%- else -%}
+          {{ section.settings.fallback_price | money }}
+        {%- endif -%}
+        <small>Free shipping · Bulb included</small>
+      </p>
+
       {%- if section.settings.subtitle != blank -%}
-        <p class="product-main__subtitle">{{ section.settings.subtitle }}</p>
-      {%- endif -%}
-      <p class="product-main__price">{{ product.price | default: section.settings.fallback_price | money }}</p>
-
-      {%- if product.description != blank -%}
-        <div class="product-main__desc rte">{{ product.description }}</div>
+        <p class="pdp__sub">{{ section.settings.subtitle }}</p>
+      {%- elsif product.description != blank -%}
+        <div class="pdp__sub rte">{{ product.description }}</div>
       {%- elsif section.settings.fallback_description != blank -%}
-        <div class="product-main__desc rte">{{ section.settings.fallback_description }}</div>
+        <div class="pdp__sub rte">{{ section.settings.fallback_description }}</div>
       {%- endif -%}
 
-      {%- form 'product', product, id: 'product-form', class: 'product-main__form' -%}
-        {%- if product.has_only_default_variant == false -%}
+      {%- form 'product', product, id: 'product-form', class: 'pdp__form' -%}
+        {%- if product != blank and product.has_only_default_variant == false -%}
           {%- for option in product.options_with_values -%}
-            <label class="product-main__option-label" for="option-{{ forloop.index }}">{{ option.name }}</label>
-            <select id="option-{{ forloop.index }}" name="options[{{ option.name | escape }}]">
-              {%- for value in option.values -%}
-                <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
-              {%- endfor -%}
-            </select>
+            <div class="pdp__variants">
+              <span class="pdp__variant-label">{{ option.name }}</span>
+              <div class="pdp__swatches" role="radiogroup" aria-label="{{ option.name | escape }}">
+                {%- for value in option.values -%}
+                  <button type="button" class="pdp__swatch"
+                          aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}"
+                          data-option-index="{{ forloop.parentloop.index0 }}"
+                          data-option-value="{{ value | escape }}">
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+              <select name="options[{{ option.name | escape }}]"
+                      data-option-select="{{ forloop.index0 }}"
+                      class="pdp__option-select" hidden>
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
           {%- endfor -%}
+        {%- elsif product == blank -%}
+          <div class="pdp__variants">
+            <span class="pdp__variant-label">Finish</span>
+            <div class="pdp__swatches" role="radiogroup" aria-label="Finish">
+              <button type="button" class="pdp__swatch" aria-pressed="true">Smoke / Chrome</button>
+              <button type="button" class="pdp__swatch" aria-pressed="false">Smoke / Brass</button>
+              <button type="button" class="pdp__swatch" aria-pressed="false">Clear / Chrome</button>
+            </div>
+          </div>
         {%- endif -%}
 
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
-        <div class="product-main__qty">
-          <label for="qty">Qty</label>
-          <input id="qty" type="number" name="quantity" value="1" min="1">
+        <div class="pdp__qty-row">
+          <div class="pdp__qty" aria-label="Quantity">
+            <button type="button" data-qty-step="-1" aria-label="Decrease">−</button>
+            <input type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" data-qty-input>
+            <button type="button" data-qty-step="1" aria-label="Increase">+</button>
+          </div>
+          <button type="submit" name="add" class="pdp__atc"
+            {% if product != blank and product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+            {%- if product == blank or product.selected_or_first_available_variant.available -%}
+              {{ section.settings.cta_text | default: 'Add to cart' }}
+            {%- else -%}
+              Sold out
+            {%- endif -%}
+          </button>
         </div>
 
-        <button type="submit" name="add" class="cta product-main__add"
-          {% if product != blank and product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
-          {%- if product == blank or product.selected_or_first_available_variant.available -%}
-            {{ section.settings.cta_text | default: 'Add to cart' }}
-          {%- else -%}
-            Sold out
-          {%- endif -%}
-        </button>
+        {%- if section.settings.show_buy_now -%}
+          <button type="submit" name="checkout" class="pdp__buynow">Buy now</button>
+        {%- endif -%}
       {%- endform -%}
 
       {%- if section.settings.show_trust -%}
-        <ul class="product-main__trust">
-          <li><strong>30-night trial</strong><span>full refund, free returns</span></li>
-          <li><strong>5-year warranty</strong><span>anything fails, we replace it</span></li>
-          <li><strong>Bulb included</strong><span>2700K spiral filament</span></li>
-          <li><strong>Free shipping</strong><span>tracked, 3&ndash;5 business days</span></li>
+        <ul class="pdp__trust">
+          <li><strong>30-night trial</strong><span>Live with it. Send it back if it isn't right.</span></li>
+          <li><strong>5-year warranty</strong><span>If anything fails, we replace it.</span></li>
+          <li><strong>Bulb included</strong><span>2700K E26 spiral filament LED.</span></li>
+          <li><strong>Free US shipping</strong><span>3&ndash;5 business days.</span></li>
         </ul>
       {%- endif -%}
 
       {%- if section.blocks.size > 0 -%}
-        <div class="product-main__details-list">
+        <div class="pdp__details">
           {%- for block in section.blocks -%}
             {%- if block.type == 'detail' -%}
-              <details class="product-main__detail" {{ block.shopify_attributes }}>
+              <details {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
                 <summary>{{ block.settings.heading }}</summary>
                 <div class="rte">{{ block.settings.content }}</div>
               </details>
@@ -87,6 +152,7 @@
         </div>
       {%- endif -%}
     </div>
+
   </div>
 </section>
 
@@ -96,14 +162,17 @@
   "tag": "section",
   "class": "section-product",
   "settings": [
-    { "type": "text",     "id": "eyebrow",              "label": "Eyebrow",          "default": "" },
-    { "type": "text",     "id": "subtitle",             "label": "Subtitle",         "default": "" },
-    { "type": "text",     "id": "cta_text",             "label": "CTA text",         "default": "Add to cart" },
-    { "type": "checkbox", "id": "show_trust",            "label": "Show trust strip", "default": true },
+    { "type": "text",     "id": "eyebrow",              "label": "Eyebrow / breadcrumb",         "default": "Avo" },
+    { "type": "text",     "id": "subtitle",             "label": "Subtitle",                     "default": "" },
+    { "type": "text",     "id": "cta_text",             "label": "CTA text",                     "default": "Add to cart" },
+    { "type": "checkbox", "id": "show_rating",          "label": "Show star rating",             "default": true },
+    { "type": "text",     "id": "rating_text",          "label": "Rating text",                  "default": "4.9 · 312 reviews" },
+    { "type": "checkbox", "id": "show_buy_now",         "label": "Show Buy now button",          "default": true },
+    { "type": "checkbox", "id": "show_trust",           "label": "Show trust strip",             "default": true },
     { "type": "header",   "content": "Demo fallbacks (used when product is blank)" },
-    { "type": "text",     "id": "fallback_title",        "label": "Fallback title",        "default": "The Halo" },
-    { "type": "number",   "id": "fallback_price",        "label": "Fallback price (cents)", "default": 24900 },
-    { "type": "richtext", "id": "fallback_description",  "label": "Fallback description" }
+    { "type": "text",     "id": "fallback_title",       "label": "Fallback title",                "default": "The Halo" },
+    { "type": "number",   "id": "fallback_price",       "label": "Fallback price (cents)",        "default": 24900 },
+    { "type": "richtext", "id": "fallback_description", "label": "Fallback description" }
   ],
   "blocks": [
     {

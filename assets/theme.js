@@ -33,6 +33,54 @@
       });
     }
 
+    // PDP: gallery thumbnail switching
+    var mainImg = document.getElementById('pdp-main-img');
+    document.querySelectorAll('.pdp__thumb').forEach(function (t) {
+      t.addEventListener('click', function () {
+        document.querySelectorAll('.pdp__thumb').forEach(function (x) { x.setAttribute('aria-current', 'false'); });
+        t.setAttribute('aria-current', 'true');
+        if (mainImg && t.dataset.img) mainImg.src = t.dataset.img;
+      });
+    });
+
+    // PDP: qty stepper
+    document.querySelectorAll('[data-qty-step]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = btn.parentElement.querySelector('[data-qty-input]');
+        if (!input) return;
+        var step = parseInt(btn.dataset.qtyStep, 10);
+        var min = parseInt(input.min || '1', 10);
+        var max = parseInt(input.max || '99', 10);
+        var v = Math.max(min, Math.min(max, (parseInt(input.value || '1', 10) + step)));
+        input.value = v;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+
+    // PDP: variant swatches mirror the hidden <select> + submit form variant id
+    document.querySelectorAll('.pdp__swatch[data-option-index]').forEach(function (s) {
+      s.addEventListener('click', function () {
+        var idx = s.dataset.optionIndex;
+        var val = s.dataset.optionValue;
+        // toggle pressed state in the same group
+        s.parentElement.querySelectorAll('.pdp__swatch').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        s.setAttribute('aria-pressed', 'true');
+        // mirror to the hidden select so the form submits the right option
+        var select = document.querySelector('[data-option-select="' + idx + '"]');
+        if (select) {
+          select.value = val;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+    // demo (no product) swatches: pure visual toggle
+    document.querySelectorAll('.pdp__swatch:not([data-option-index])').forEach(function (s) {
+      s.addEventListener('click', function () {
+        s.parentElement.querySelectorAll('.pdp__swatch').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        s.setAttribute('aria-pressed', 'true');
+      });
+    });
+
     // Open <details> FAQ items one at a time on mobile for tidiness.
     var faqs = document.querySelectorAll('.faq__list .faq__item');
     faqs.forEach(function (item) {
