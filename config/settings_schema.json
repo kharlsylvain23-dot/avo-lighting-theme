@@ -32,7 +32,7 @@
   {
     "name": "Layout",
     "settings": [
-      { "type": "range", "id": "page_width", "label": "Max content width (px)", "min": 1000, "max": 1600, "step": 50, "default": 1300 }
+      { "type": "range", "id": "page_width", "label": "Max content width (px)", "min": 1000, "max": 1600, "step": 20, "default": 1280 }
     ]
   }
 ]
