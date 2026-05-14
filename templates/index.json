@@ -1,0 +1,104 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "overline": "Avo Lighting",
+        "heading": "Minimalist Elegance, Beautifully Lit",
+        "subheading": "One lamp. Thoughtfully designed. Crafted to transform any space with clean lines and a warm, inviting glow.",
+        "button_text": "Add to Cart"
+      }
+    },
+    "features": {
+      "type": "features",
+      "settings": {
+        "overline": "Why This Lamp",
+        "title": "Designed with Intention"
+      },
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "minimalist",
+            "title": "Minimalist Design",
+            "text": "Clean lines and a refined silhouette that complements any interior without overwhelming it."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "light",
+            "title": "Warm Ambient Glow",
+            "text": "Engineered to cast a soft, warm light that creates the perfect atmosphere in any room."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "quality",
+            "title": "Premium Materials",
+            "text": "Crafted from carefully selected materials for a look and feel that lasts."
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Worldwide Shipping",
+            "text": "Delivered to your door at no extra cost, carefully packaged to arrive in perfect condition."
+          }
+        }
+      },
+      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"]
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "overline": "The Details",
+        "heading": "Light That Speaks for Itself",
+        "text": "<p>At Avo Lighting, we believe less is more. This lamp was designed to disappear into your space while elevating everything around it — a quiet statement of taste and intention.</p><p>From the material finish to the quality of light it casts, every element has been refined to feel effortless.</p>",
+        "image_position": "left",
+        "button_text": ""
+      }
+    },
+    "reviews": {
+      "type": "judgeme-reviews",
+      "settings": {
+        "overline": "Reviews",
+        "title": "What Customers Are Saying"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "overline": "What Our Customers Say",
+        "title": "Loved by Hundreds"
+      },
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The craftsmanship is extraordinary. This lamp has become the centerpiece of our living room.",
+            "author": "Sarah M."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Beautiful design and the warm light creates the most incredible ambiance. Worth every penny.",
+            "author": "James L."
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I ordered two and they arrived beautifully packaged. The attention to detail is remarkable.",
+            "author": "Elena R."
+          }
+        }
+      },
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"]
+    }
+  },
+  "order": ["hero", "features", "image-with-text", "reviews", "testimonials"]
+}

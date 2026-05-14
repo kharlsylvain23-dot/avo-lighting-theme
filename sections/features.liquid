@@ -1,0 +1,124 @@
+<section class="features-section" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-overline">{{ section.settings.overline | default: 'Why This Lamp' }}</span>
+      <h2 class="section-title">{{ section.settings.title | default: 'Designed with Intention' }}</h2>
+    </div>
+    <div class="features-grid">
+      {%- for block in section.blocks -%}
+        <div class="feature-card" {{ block.shopify_attributes }}>
+          <div class="feature-icon">
+            {%- case block.settings.icon -%}
+              {%- when 'minimalist' -%}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+              {%- when 'light' -%}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              {%- when 'quality' -%}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>
+              {%- when 'shipping' -%}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="m16 8 4 2v6l-4 2"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {%- else -%}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+            {%- endcase -%}
+          </div>
+          <h3 class="feature-title">{{ block.settings.title }}</h3>
+          <p class="feature-text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Features",
+  "tag": "section",
+  "class": "section-features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Why This Lamp"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Designed with Intention"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "minimalist", "label": "Minimalist" },
+            { "value": "light", "label": "Light / Warm" },
+            { "value": "quality", "label": "Quality / Star" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "lamp", "label": "Lamp" }
+          ],
+          "default": "lamp"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Clean Design"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Every detail has been considered — nothing more, nothing less."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "minimalist",
+            "title": "Minimalist Design",
+            "text": "Clean lines and a refined silhouette that complements any interior without overwhelming it."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "light",
+            "title": "Warm Ambient Glow",
+            "text": "Engineered to cast a soft, warm light that creates the perfect atmosphere in any room."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "quality",
+            "title": "Premium Materials",
+            "text": "Crafted from carefully selected materials for a look and feel that lasts."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Worldwide Shipping",
+            "text": "Delivered to your door at no extra cost, carefully packaged to arrive in perfect condition."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

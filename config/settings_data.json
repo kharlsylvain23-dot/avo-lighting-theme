@@ -1,0 +1,13 @@
+{
+  "current": {
+    "color_primary": "#000000",
+    "color_secondary": "#333333",
+    "color_background": "#FFFFFF",
+    "color_text": "#000000",
+    "color_text_light": "#555555",
+    "color_border": "#E0E0E0",
+    "color_accent": "#000000",
+    "sections": {},
+    "content_for_index": []
+  }
+}

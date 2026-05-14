@@ -1,0 +1,90 @@
+<section class="featured-collection" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-overline">{{ section.settings.overline | default: 'Curated Selection' }}</span>
+      <h2 class="section-title">{{ section.settings.title | default: 'Featured Lamps' }}</h2>
+      <p class="section-subtitle">{{ section.settings.subtitle | default: 'Discover our most loved designs, each crafted to bring warmth and character to your home.' }}</p>
+    </div>
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign limit = section.settings.products_to_show | default: 4 -%}
+
+    <div class="product-grid product-grid--{{ section.settings.columns }}">
+      {%- for product in collection.products limit: limit -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        {%- for i in (1..limit) -%}
+          {% render 'product-card-placeholder', index: i %}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+
+    {% if section.settings.show_view_all and collection != blank %}
+      <div class="section-footer">
+        <a href="{{ collection.url }}" class="btn btn-secondary">View All</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "Curated Selection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Lamps"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our most loved designs, each crafted to bring warmth and character to your home."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

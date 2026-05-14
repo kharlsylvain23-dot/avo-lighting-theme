@@ -1,0 +1,54 @@
+<div class="customer-page">
+  <div class="section-container section-container--narrow">
+    <h1 class="customer-title">Your Addresses</h1>
+    <a href="/account" class="link-underline">&larr; Back to account</a>
+
+    <div class="addresses-list">
+      <h2 class="customer-subtitle">Add a New Address</h2>
+
+      {%- form 'customer_address', customer.new_address -%}
+        {% include 'customer-address-fields' %}
+        <button type="submit" class="btn btn-primary">Add Address</button>
+      {%- endform -%}
+
+      <hr class="divider">
+
+      {%- if customer.addresses.size > 0 -%}
+        {%- for address in customer.addresses -%}
+          <div class="address-card">
+            <p>{{ address | format_address }}</p>
+            {%- if address == customer.default_address -%}
+              <span class="badge">Default</span>
+            {%- endif -%}
+            <div class="address-actions">
+              <button class="btn btn-outline btn-sm address-edit-toggle" data-address-id="{{ address.id }}">Edit</button>
+              {%- form 'customer_address', address -%}
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-outline btn-sm">Delete</button>
+              {%- endform -%}
+            </div>
+
+            <div class="address-edit-form" id="EditAddress_{{ address.id }}" style="display:none;">
+              {%- form 'customer_address', address -%}
+                {% include 'customer-address-fields', form: form %}
+                <button type="submit" class="btn btn-primary btn-sm">Update Address</button>
+              {%- endform -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <p>No addresses saved yet.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.address-edit-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = btn.getAttribute('data-address-id');
+      var form = document.getElementById('EditAddress_' + id);
+      if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+</script>

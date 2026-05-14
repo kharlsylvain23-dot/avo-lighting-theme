@@ -1,0 +1,18 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Free shipping on all orders",
+        "link": "/"
+      }
+    }
+  },
+  "order": ["announcement-bar", "header"]
+}

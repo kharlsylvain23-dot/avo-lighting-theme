@@ -1,0 +1,55 @@
+<section class="search-main" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <h1 class="page-title">Search</h1>
+
+    <form action="/search" method="get" class="search-form" role="search">
+      <div class="search-input-wrap">
+        <input
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search for lamps, styles, collections..."
+          class="search-input"
+          aria-label="Search"
+        >
+        <button type="submit" class="search-submit" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    {%- if search.performed -%}
+      <p class="search-results-count">
+        {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }} for "{{ search.terms }}"
+      </p>
+
+      {%- if search.results_count > 0 -%}
+        <div class="product-grid product-grid--3">
+          {%- for result in search.results -%}
+            {%- if result.object_type == 'product' -%}
+              {% render 'product-card', product: result %}
+            {%- else -%}
+              <div class="search-result-item">
+                <h3><a href="{{ result.url }}">{{ result.title }}</a></h3>
+                <p>{{ result.content | strip_html | truncate: 150 }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="search-no-results">No results found. Try a different search term.</p>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "tag": "section",
+  "class": "section-search"
+}
+{% endschema %}

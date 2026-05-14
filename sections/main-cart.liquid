@@ -1,0 +1,96 @@
+<section class="cart-main" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <h1 class="cart-title">Your Cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="/cart" method="post" id="cart-form">
+        <div class="cart-layout">
+          <div class="cart-items">
+            {%- for item in cart.items -%}
+              <div class="cart-item" data-line="{{ forloop.index }}">
+                <a href="{{ item.url }}" class="cart-item-image-link">
+                  {%- if item.image -%}
+                    <img
+                      src="{{ item.image | image_url: width: 200 }}"
+                      alt="{{ item.title | escape }}"
+                      class="cart-item-image"
+                      width="200"
+                      height="200"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </a>
+                <div class="cart-item-details">
+                  <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="cart-item-variant">{{ item.variant.title }}</p>
+                  {%- endunless -%}
+                  {%- if item.selling_plan_allocation -%}
+                    <p class="cart-item-plan">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  {%- endif -%}
+                  <p class="cart-item-price">{{ item.final_price | money }}</p>
+                  <div class="cart-item-quantity">
+                    <div class="quantity-selector">
+                      <button type="button" class="qty-btn qty-minus" data-line="{{ forloop.index }}" aria-label="Decrease quantity">−</button>
+                      <input
+                        type="number"
+                        name="updates[]"
+                        value="{{ item.quantity }}"
+                        min="0"
+                        class="qty-input"
+                        aria-label="Quantity for {{ item.title }}"
+                        data-line="{{ forloop.index }}"
+                      >
+                      <button type="button" class="qty-btn qty-plus" data-line="{{ forloop.index }}" aria-label="Increase quantity">+</button>
+                    </div>
+                  </div>
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart-item-remove" aria-label="Remove {{ item.title }}">Remove</a>
+                </div>
+                <div class="cart-item-total">
+                  {{ item.final_line_price | money }}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="cart-summary">
+            <div class="cart-summary-inner">
+              <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              <p class="cart-note-text">Shipping & taxes calculated at checkout</p>
+
+              <label for="cart-note" class="cart-note-label">Order notes</label>
+              <textarea id="cart-note" name="note" class="cart-note-textarea" placeholder="Special instructions...">{{ cart.note }}</textarea>
+
+              <button type="submit" name="checkout" class="btn btn-primary btn-checkout">
+                Checkout &mdash; {{ cart.total_price | money }}
+              </button>
+
+              <a href="/collections/all" class="cart-continue">Continue Shopping</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="cart-empty">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="1">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <p class="cart-empty-text">Your cart is empty</p>
+        <a href="/collections/all" class="btn btn-primary">Start Shopping</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "section-cart"
+}
+{% endschema %}

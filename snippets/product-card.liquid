@@ -1,0 +1,50 @@
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card-link" aria-label="{{ product.title }}">
+    <div class="product-card-image-wrap">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 480 }}"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          class="product-card-image"
+          width="480"
+          height="480"
+          loading="lazy"
+        >
+        {%- if product.images[1] -%}
+          <img
+            src="{{ product.images[1] | image_url: width: 480 }}"
+            alt="{{ product.images[1].alt | default: product.title | escape }}"
+            class="product-card-image product-card-image--hover"
+            width="480"
+            height="480"
+            loading="lazy"
+          >
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <span class="product-card-badge">-{{ savings }}%</span>
+      {%- endif -%}
+
+      {%- unless product.available -%}
+        <span class="product-card-badge product-card-badge--sold-out">Sold Out</span>
+      {%- endunless -%}
+    </div>
+
+    <div class="product-card-info">
+      <h3 class="product-card-title">{{ product.title }}</h3>
+      {%- if product.vendor != blank -%}
+        <p class="product-card-vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+      <div class="product-card-price">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="price-compare">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+        <span class="price-current">{{ product.price | money }}</span>
+      </div>
+    </div>
+  </a>
+</div>

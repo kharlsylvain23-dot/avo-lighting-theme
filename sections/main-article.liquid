@@ -1,0 +1,55 @@
+<section class="article-main" data-section-id="{{ section.id }}">
+  <div class="section-container section-container--narrow">
+    <article>
+      <header class="article-header">
+        <time class="article-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{ article.published_at | date: '%B %d, %Y' }}
+        </time>
+        <h1 class="article-title">{{ article.title }}</h1>
+        {%- if article.author -%}
+          <p class="article-author">By {{ article.author }}</p>
+        {%- endif -%}
+      </header>
+
+      {%- if article.image -%}
+        <div class="article-image-wrap">
+          <img
+            src="{{ article.image | image_url: width: 1200 }}"
+            alt="{{ article.image.alt | default: article.title | escape }}"
+            class="article-image"
+            width="1200"
+            height="600"
+            loading="eager"
+          >
+        </div>
+      {%- endif -%}
+
+      <div class="article-content rte">
+        {{ article.content }}
+      </div>
+    </article>
+
+    {%- if blog.comments_enabled? -%}
+      <div class="article-comments">
+        <h2>Comments</h2>
+        {%- for comment in article.comments -%}
+          <div class="comment">
+            <p class="comment-author">{{ comment.author }}</p>
+            <p class="comment-body">{{ comment.content }}</p>
+            <time class="comment-date">{{ comment.created_at | date: '%B %d, %Y' }}</time>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <a href="{{ blog.url }}" class="btn btn-secondary">&larr; Back to {{ blog.title }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article content",
+  "tag": "section",
+  "class": "section-article"
+}
+{% endschema %}

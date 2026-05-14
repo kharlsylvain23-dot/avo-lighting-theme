@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "shipping_estimate": "Estimated delivery: 5–12 business days"
+      },
+      "blocks": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "overline": "What Our Customers Say",
+        "title": "Loved by Hundreds"
+      },
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The craftsmanship is extraordinary. This lamp has become the centerpiece of our living room.",
+            "author": "Sarah M."
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Beautiful design and the warm light creates the most incredible ambiance. Worth every penny.",
+            "author": "James L."
+          }
+        },
+        "testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I ordered two and they arrived beautifully packaged. The attention to detail is remarkable.",
+            "author": "Elena R."
+          }
+        }
+      },
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"]
+    }
+  },
+  "order": ["main", "testimonials"]
+}

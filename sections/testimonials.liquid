@@ -1,0 +1,93 @@
+<section class="testimonials" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-overline">{{ section.settings.overline | default: 'What Our Customers Say' }}</span>
+      <h2 class="section-title">{{ section.settings.title | default: 'Reviews' }}</h2>
+    </div>
+    <div class="testimonials-grid">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-stars">
+            {%- for i in (1..5) -%}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#000000" stroke="#000000" stroke-width="1">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <p class="testimonial-text">"{{ block.settings.quote }}"</p>
+          <p class="testimonial-author">— {{ block.settings.author }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The craftsmanship is extraordinary. This lamp has become the centerpiece of our living room."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Sarah M."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The craftsmanship is extraordinary. This lamp has become the centerpiece of our living room.",
+            "author": "Sarah M."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Beautiful design and the warm light creates the most incredible ambiance. Worth every penny.",
+            "author": "James L."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I ordered two table lamps and they arrived beautifully packaged. The attention to detail is remarkable.",
+            "author": "Elena R."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

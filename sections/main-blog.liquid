@@ -1,0 +1,55 @@
+<section class="blog-main" data-section-id="{{ section.id }}">
+  <div class="section-container">
+    <h1 class="page-title">{{ blog.title }}</h1>
+
+    <div class="blog-grid">
+      {%- paginate blog.articles by 6 -%}
+        {%- for article in blog.articles -%}
+          <article class="blog-card">
+            {%- if article.image -%}
+              <a href="{{ article.url }}" class="blog-card-image-link">
+                <img
+                  src="{{ article.image | image_url: width: 600 }}"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  class="blog-card-image"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                >
+              </a>
+            {%- endif -%}
+            <div class="blog-card-content">
+              <time class="blog-card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                {{ article.published_at | date: '%B %d, %Y' }}
+              </time>
+              <h2 class="blog-card-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h2>
+              <p class="blog-card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 150 }}</p>
+              <a href="{{ article.url }}" class="blog-card-link">Read More</a>
+            </div>
+          </article>
+        {%- endfor -%}
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Blog pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="pagination-link">&larr; Newer</a>
+            {%- endif -%}
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="pagination-link">Older &rarr;</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "tag": "section",
+  "class": "section-blog"
+}
+{% endschema %}

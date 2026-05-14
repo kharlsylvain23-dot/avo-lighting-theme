@@ -1,0 +1,51 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter store using password:",
+      "login_password_button": "Enter using password",
+      "close": "Close",
+      "password_link": "Enter using password",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "close": "Close"
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more",
+      "back_to_blog": "Back to {{ title }}"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is empty",
+      "subtotal": "Subtotal",
+      "continue_shopping": "Continue Shopping",
+      "checkout": "Checkout",
+      "remove": "Remove",
+      "note": "Order notes",
+      "shipping_note": "Shipping & taxes calculated at checkout"
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "No products found"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "quantity": "Quantity",
+      "description": "Description"
+    }
+  },
+  "newsletter": {
+    "label": "Email address",
+    "button_label": "Subscribe",
+    "success": "Thanks for subscribing!"
+  }
+}

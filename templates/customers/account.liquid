@@ -1,0 +1,54 @@
+<div class="customer-page">
+  <div class="section-container">
+    <div class="account-header">
+      <h1 class="customer-title">My Account</h1>
+      <a href="{{ routes.account_logout_url }}" class="btn btn-outline">Log Out</a>
+    </div>
+
+    <div class="account-grid">
+      <div class="account-details">
+        <h2 class="customer-subtitle">Account Details</h2>
+        <p><strong>{{ customer.name }}</strong></p>
+        <p>{{ customer.email }}</p>
+        {%- if customer.default_address -%}
+          <p>{{ customer.default_address | format_address }}</p>
+        {%- endif -%}
+        <a href="/account/addresses" class="link-underline">View addresses ({{ customer.addresses_count }})</a>
+      </div>
+
+      <div class="account-orders">
+        <h2 class="customer-subtitle">Order History</h2>
+        {%- if customer.orders.size > 0 -%}
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr>
+                  <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | date: "%B %d, %Y" }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td>{{ order.total_price | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          {%- if customer.orders.size > 20 -%}
+            <div class="pagination">
+              {{ paginate | default_pagination }}
+            </div>
+          {%- endif -%}
+        {%- else -%}
+          <p>You haven't placed any orders yet.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

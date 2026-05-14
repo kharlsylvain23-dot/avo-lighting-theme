@@ -1,0 +1,230 @@
+{%- assign product = section.settings.product -%}
+{%- if product != blank -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": "{{ shop.url }}{{ product.url }}",
+    "image": [
+      {%- for image in product.images -%}
+        "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ],
+    "description": {{ product.description | strip_html | truncate: 500 | json }},
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    "sku": {{ current_variant.sku | json }},
+    "offers": {
+      "@type": "Offer",
+      "url": "{{ shop.url }}{{ product.url }}",
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ current_variant.price | divided_by: 100.0 | json }},
+      "availability": "https://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}"
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Collect images: blocks first, then fallback to product images {%- endcomment -%}
+{%- assign has_block_images = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'image' and block.settings.image != blank -%}
+    {%- assign has_block_images = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<section class="hero-section" data-section-id="{{ section.id }}">
+  <div class="hero-container hero-container--landing">
+    <div class="hero-content">
+      <span class="hero-overline">{{ section.settings.overline | default: 'Avo Lighting' }}</span>
+      <h1 class="hero-title">{{ section.settings.heading | default: 'Minimalist Elegance, Beautifully Lit' }}</h1>
+      <p class="hero-subtitle">{{ section.settings.subheading | default: 'One lamp. Thoughtfully designed. Crafted to transform any space with clean lines and a warm, inviting glow.' }}</p>
+
+      <div class="hero-actions">
+        {%- if product != blank and current_variant.available -%}
+          <div class="hero-judgeme-badge">
+            <span class="jdgm-preview-badge" data-id="{{ product.id }}">{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', product: product %}</span>
+          </div>
+          <div class="hero-price-display">
+            {%- if section.settings.compare_price != blank -%}
+              <span class="price-compare">{{ section.settings.compare_price }}</span>
+              <span class="price-badge">Sale</span>
+            {%- endif -%}
+            <span class="price-current hero-price-current">{{ section.settings.price | default: current_variant.price | money }}</span>
+          </div>
+          <form method="post" action="/cart/add" class="hero-add-form" id="hero-add-form">
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn btn-primary hero-add-btn" id="hero-add-btn">
+              <span class="btn-text">{{ section.settings.button_text | default: 'Add to Cart' }}</span>
+              <span class="btn-loading" style="display:none;">Adding…</span>
+              <span class="btn-success" style="display:none;">Added ✓</span>
+            </button>
+          </form>
+        {%- elsif product != blank -%}
+          <button class="btn btn-primary" disabled>Sold Out</button>
+        {%- else -%}
+          <button class="btn btn-primary" disabled>{{ section.settings.button_text | default: 'Add to Cart' }}</button>
+          <p class="hero-empty-note">Select your product in theme settings</p>
+        {%- endif -%}
+      </div>
+
+      <div class="hero-scroll-hint">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+      {%- if has_block_images -%}
+        <div class="hero-gallery" id="hero-gallery">
+          <div class="hero-gallery-main">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'image' and block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.alt_text | default: 'Product image' }}"
+                  class="hero-gallery-slide {% if forloop.index == 1 %}active{% endif %}"
+                  width="900"
+                  height="900"
+                  loading="{% if forloop.index == 1 %}eager{% else %}lazy{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- assign image_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'image' and block.settings.image != blank -%}
+              {%- assign image_count = image_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if image_count > 1 -%}
+            <div class="hero-gallery-thumbs">
+              {%- assign thumb_index = 0 -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'image' and block.settings.image != blank -%}
+                  <button
+                    class="hero-thumb {% if thumb_index == 0 %}active{% endif %}"
+                    data-slide="{{ thumb_index }}"
+                    aria-label="View image {{ thumb_index | plus: 1 }}"
+                  >
+                    <img
+                      src="{{ block.settings.image | image_url: width: 120 }}"
+                      alt="{{ block.settings.image.alt | default: block.settings.alt_text | default: 'Thumbnail' }}"
+                      width="120"
+                      height="120"
+                      loading="lazy"
+                    >
+                  </button>
+                  {%- assign thumb_index = thumb_index | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+      {%- elsif product != blank and product.featured_image != blank -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 900 }}"
+          alt="{{ product.featured_image.alt | default: product.title }}"
+          class="hero-image"
+          width="900"
+          height="900"
+          loading="eager"
+        >
+
+      {%- else -%}
+        <div class="hero-placeholder">
+          <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="0.4">
+            <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+          </svg>
+          <p>Add images using the blocks below</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Overline text",
+      "default": "Avo Lighting"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Minimalist Elegance, Beautifully Lit"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "One lamp. Thoughtfully designed. Crafted to transform any space with clean lines and a warm, inviting glow."
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Display price (e.g. $89.99)",
+      "info": "Leave blank to use the product's actual price"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Compare-at price (e.g. $149.99)",
+      "info": "Shows as a crossed-out price with a Sale badge. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt text (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}
