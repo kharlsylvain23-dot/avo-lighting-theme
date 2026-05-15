@@ -2036,3 +2036,146 @@ h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); }
   .orders-table th,
   .orders-table td { padding: 0.5rem 0.25rem; }
 }
+
+/* AVO PRODUCT PAGE STYLES */
+.product-page {
+  padding: 48px 20px;
+}
+
+.product-page__container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.product-page__media img,
+.product-page__placeholder {
+  width: 100%;
+  border-radius: 24px;
+  background: #f4f4f5;
+}
+
+.product-page__placeholder {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #737373;
+}
+
+.product-page__eyebrow {
+  margin: 0 0 12px;
+  color: #e73b77;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.product-page__title {
+  margin: 0 0 20px;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.product-page__price-tag {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 12px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.product-page__compare-price {
+  margin-bottom: 20px;
+  color: #737373;
+  text-decoration: line-through;
+}
+
+.product-page__description {
+  margin: 24px 0;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.product-page__form {
+  margin-top: 28px;
+}
+
+.product-page__label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.product-page__select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.product-page__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.product-page__button {
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid #111827;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.product-page__button--primary {
+  background: #e73b77;
+  border-color: #e73b77;
+  color: #ffffff;
+}
+
+.product-page__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.product-page__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.product-page__trust span {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+}
+
+@media (max-width: 800px) {
+  .product-page__container {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page__actions {
+    flex-direction: column;
+  }
+
+  .product-page__button {
+    width: 100%;
+  }
+}

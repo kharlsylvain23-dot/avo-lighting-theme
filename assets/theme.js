@@ -211,3 +211,29 @@
   }
 
 })();
+
+/* AVO PRODUCT PAGE JS */
+document.addEventListener('DOMContentLoaded', function () {
+  var variantSelect = document.getElementById('ProductVariant');
+  var price = document.getElementById('ProductPrice');
+
+  if (variantSelect && price) {
+    variantSelect.addEventListener('change', function () {
+      var selected = variantSelect.options[variantSelect.selectedIndex];
+      if (selected && selected.dataset.price) {
+        price.textContent = selected.dataset.price;
+      }
+    });
+  }
+
+  document.querySelectorAll('button[name="checkout"]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var form = button.closest('form');
+      if (!form) return;
+
+      setTimeout(function () {
+        window.location.href = '/checkout';
+      }, 500);
+    });
+  });
+});
